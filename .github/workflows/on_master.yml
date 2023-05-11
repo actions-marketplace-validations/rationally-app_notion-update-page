@@ -19,8 +19,8 @@ jobs:
       - name: Commit dist files
         continue-on-error: true
         run: |
-          git config --local user.email "ting.szeying@gmail.com"
-          git config --local user.name "szenius"
+          git config --local user.email "yjjyongjiajie@gmail.com"
+          git config --local user.name "yongjiajie"
           git add ./dist
           git commit -m "build: update dist files"
       - name: Push changes
@@ -33,7 +33,7 @@ jobs:
         id: version
         uses: anothrNick/github-tag-action@1.35.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN_SUPPLYALLY_BOT }}
           WITH_V: false
           RELEASE_BRANCHES: master
           DEFAULT_BUMP: patch
@@ -41,8 +41,8 @@ jobs:
       - name: Update Notion property
         uses: ./
         with:
-          gh-username: "szenius"
-          gh-token: ${{ secrets.GH_ACCESS_TOKEN }}
-          notion-key: ${{ secrets.NOTION_KEY }}
+          gh-username: "supplyally-bot"
+          gh-token: ${{ secrets.GH_TOKEN_SUPPLYALLY_BOT }}
+          notion-key: ${{ secrets.NOTION_API_KEY_UPDATE_STORY }}
           notion-property-name: "Version Tag"
           notion-update-value: "${{ steps.version.outputs.new_tag }}"
